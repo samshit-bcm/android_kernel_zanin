@@ -202,6 +202,29 @@ config PM
 	def_bool y
 	depends on PM_SLEEP || PM_RUNTIME
 
+config PM_WAKELOCKS
+	bool "User space wakeup sources interface"
+	depends on PM_SLEEP
+	default n
+	---help---
+	Allow user space to create, activate and deactivate wakeup source
+	objects with the help of a sysfs-based interface.
+
+config PM_WAKELOCKS_LIMIT
+	int "Maximum number of user space wakeup sources (0 = no limit)"
+	range 0 100000
+	default 100
+	depends on PM_WAKELOCKS
+
+config PM_WAKELOCKS_GC
+	bool "Garbage collector for user space wakeup sources"
+	depends on PM_WAKELOCKS
+	default y
+
+config PM
+	def_bool y
+	depends on PM_SLEEP || PM_RUNTIME
+
 config PM_DEBUG
 	bool "Power Management Debug Support"
 	depends on PM
@@ -319,6 +342,34 @@ config SUSPEND_TIME
 	  Prints the time spent in suspend in the kernel log, and
 	  keeps statistics on the time spent in suspend in
 	  /sys/kernel/debug/suspend_time
+
+config CPU_PM
+	bool
+	depends on SUSPEND || CPU_IDLE
+
+config PM_GENERIC_DOMAINS
+	bool
+	depends on PM
+
+config WQ_POWER_EFFICIENT_DEFAULT
+	bool "Enable workqueue power-efficient mode by default"
+	depends on PM
+	default n
+	help
+	  Per-cpu workqueues are generally preferred because they show
+	  better performance thanks to cache locality; unfortunately,
+	  per-cpu workqueues tend to be more power hungry than unbound
+	  workqueues.
+
+	  Enabling workqueue.power_efficient kernel parameter makes the
+	  per-cpu workqueues which were observed to contribute
+	  significantly to power consumption unbound, leading to measurably
+	  lower power usage at the cost of small performance overhead.
+
+	  This config option determines whether workqueue.power_efficient
+	  is enabled by default.
+
+	  If in doubt, say N.
 
 config QUICK_WAKEUP
 	bool "Quick wakeup"
