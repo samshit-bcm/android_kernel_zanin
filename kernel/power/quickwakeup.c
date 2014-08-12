@@ -18,6 +18,12 @@
 #include <linux/mutex.h>
 #include <linux/quickwakeup.h>
 
+#ifdef CONFIG_POWERSUSPEND
+#include <linux/powersuspend.h>
+#endif
+
+#include "power.h"
+
 static LIST_HEAD(qw_head);
 static DEFINE_MUTEX(list_lock);
 
