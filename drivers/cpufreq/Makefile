@@ -35,6 +35,7 @@ obj-$(CONFIG_CPU_FREQ_GOV_SMOOTHASS)    += cpufreq_smoothass.o
 obj-$(CONFIG_CPU_FREQ_GOV_SUPERBAD)     += cpufreq_superbad.o 
 obj-$(CONFIG_CPU_FREQ_GOV_WHEATLEY)     += cpufreq_wheatley.o 
 obj-$(CONFIG_CPU_FREQ_GOV_ZZMOOVE)      += cpufreq_zzmoove.o
+obj-$(CONFIG_CPU_FREQ_GOV_HYBRID)	+= cpufreq_hybrid.o
 
 # CPUfreq cross-arch helpers
 obj-$(CONFIG_CPU_FREQ_TABLE)		+= freq_table.o
