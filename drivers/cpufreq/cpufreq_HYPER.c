@@ -80,6 +80,8 @@
 
 static unsigned int min_sampling_rate;
 
+#define DEFAULT_SAMPLING_RATE                   (60000)
+#define BOOSTED_SAMPLING_RATE                   (40000)
 #define LATENCY_MULTIPLIER			(1000)
 #define MIN_LATENCY_MULTIPLIER			(100)
 #define TRANSITION_LATENCY_LIMIT		(10 * 1000 * 1000)

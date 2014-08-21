@@ -98,8 +98,8 @@ static struct nightmare_tuners {
 	.inc_cpu_load = ATOMIC_INIT(70),
 	.dec_cpu_load = ATOMIC_INIT(50),
 #ifdef CONFIG_CPU_EXYNOS4210
-	.freq_for_responsiveness = ATOMIC_INIT(200000),
-	.freq_for_responsiveness_max = ATOMIC_INIT(1200000),
+	.freq_for_responsiveness = ATOMIC_INIT(2265600),
+	.freq_for_responsiveness_max = ATOMIC_INIT(2803200),
 #else
 	.freq_for_responsiveness = ATOMIC_INIT(540000),
 	.freq_for_responsiveness_max = ATOMIC_INIT(1890000),
