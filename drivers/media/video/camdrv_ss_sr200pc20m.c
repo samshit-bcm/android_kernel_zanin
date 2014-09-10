@@ -60,7 +60,7 @@
 #endif
 
 static DEFINE_MUTEX(af_cancel_op);
-extern inline struct camdrv_ss_state *to_state(struct v4l2_subdev *sd);
+extern struct camdrv_ss_state *to_state(struct v4l2_subdev *sd);
 
 
 extern  int camdrv_ss_i2c_set_config_register(struct i2c_client *client, 
