@@ -378,3 +378,10 @@ config QUICK_WAKEUP
 	---help---
 	  Allow kernel driver to do periodic jobs without resuming the full system
 	  This option can increase battery life on android powered smartphone.
+
+config HTC_PNPMGR
+        bool "Htc Power and Performance manager"
+        depends on PM
+        ---help---
+          Collect the sysfs files nodes for pnpmgr usage.
+
