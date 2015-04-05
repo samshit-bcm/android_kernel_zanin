@@ -58,6 +58,13 @@
 #include "lcd/display_drv.h"
 #include <plat/pi_mgr.h>
 
+#ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
+#if defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE)
+#include <linux/input/doubletap2wake.h>
+#endif
+#endif
+
+
 /*#define RHEA_FB_DEBUG*/
 //#define PARTIAL_UPDATE_SUPPORT
 #define RHEA_FB_ENABLE_DYNAMIC_CLOCK	1
@@ -482,6 +489,13 @@ static void rhea_fb_early_suspend(struct early_suspend *h)
 		rheafb_error("Early suspend with the wrong level!\n");
 		break;
 	}
+
+
+#ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
+#if defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE)
+dt2w_scr_suspended = true;
+#endif
+#endif
 }
 extern unsigned int lp_boot_mode;
 static void rhea_fb_late_resume(struct early_suspend *h)
@@ -566,6 +580,12 @@ static void rhea_fb_late_resume(struct early_suspend *h)
 		break;
 	}
 
+
+#ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
+#if defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE)
+dt2w_scr_suspended = false;
+#endif
+#endif
 }
 #endif
 
