@@ -1917,6 +1917,10 @@ static void cxt5051_init_mic_port(struct hda_codec *codec, hda_nid_t nid,
 	snd_hda_codec_write(codec, nid, 0,
 			    AC_VERB_SET_UNSOLICITED_ENABLE,
 			    AC_USRSP_EN | event);
+}
+
+static void cxt5051_init_mic_jack(struct hda_codec *codec, hda_nid_t nid)
+{
 	snd_hda_input_jack_add(codec, nid, SND_JACK_MICROPHONE, NULL);
 	snd_hda_input_jack_report(codec, nid);
 }
@@ -1934,7 +1938,6 @@ static int cxt5051_init(struct hda_codec *codec)
 	struct conexant_spec *spec = codec->spec;
 
 	conexant_init(codec);
-	conexant_init_jacks(codec);
 
 	if (spec->auto_mic & AUTO_MIC_PORTB)
 		cxt5051_init_mic_port(codec, 0x17, CXT5051_PORTB_EVENT);
@@ -2066,6 +2069,12 @@ static int patch_cxt5051(struct hda_codec *codec)
 
 	if (spec->beep_amp)
 		snd_hda_attach_beep_device(codec, spec->beep_amp);
+
+	conexant_init_jacks(codec);
+	if (spec->auto_mic & AUTO_MIC_PORTB)
+		cxt5051_init_mic_jack(codec, 0x17);
+	if (spec->auto_mic & AUTO_MIC_PORTC)
+		cxt5051_init_mic_jack(codec, 0x18);
 
 	return 0;
 }
@@ -3994,9 +4003,14 @@ static void cx_auto_init_output(struct hda_codec *codec)
 	int i;
 
 	mute_outputs(codec, spec->multiout.num_dacs, spec->multiout.dac_nids);
-	for (i = 0; i < cfg->hp_outs; i++)
+	for (i = 0; i < cfg->hp_outs; i++) {
+		unsigned int val = PIN_OUT;
+		if (snd_hda_query_pin_caps(codec, cfg->hp_pins[i]) &
+		    AC_PINCAP_HP_DRV)
+			val |= AC_PINCTL_HP_EN;
 		snd_hda_codec_write(codec, cfg->hp_pins[i], 0,
-				    AC_VERB_SET_PIN_WIDGET_CONTROL, PIN_HP);
+				    AC_VERB_SET_PIN_WIDGET_CONTROL, val);
+	}
 	mute_outputs(codec, cfg->hp_outs, cfg->hp_pins);
 	mute_outputs(codec, cfg->line_outs, cfg->line_out_pins);
 	mute_outputs(codec, cfg->speaker_outs, cfg->speaker_pins);
