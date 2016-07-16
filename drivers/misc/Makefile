@@ -91,6 +91,5 @@ obj-$(CONFIG_BRCM_EMMC_RPMB)	+= emmc_rpmb/
 obj-$(CONFIG_SENSORS_BMA222)    += bma222.o
 obj-$(CONFIG_AMI306)		+= ami306/
 obj-$(CONFIG_BLX)               += blx.o
-obj-$(CONFIG_SEC_MODEM)		+= modem_if/
 obj-$(CONFIG_UID_CPUTIME) += uid_cputime.o
 
