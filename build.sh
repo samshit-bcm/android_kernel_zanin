@@ -13,7 +13,7 @@ clear
 # Resources
 THREAD="-j$(grep -c ^processor /proc/cpuinfo)"
 DEFCONFIG="cyanogenmod_corsica_defconfig"
-KERNEL="Image"
+KERNEL="zImage"
 
 #Hyper Kernel Details
 BASE_VER="Hyper"
