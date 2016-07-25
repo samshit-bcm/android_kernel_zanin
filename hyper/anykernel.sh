@@ -3,19 +3,19 @@
 
 ## AnyKernel setup
 # EDIFY properties
-do.devicecheck=0
+do.devicecheck=1
 do.system=0
 do.initd=0
 do.modules=1
 do.cleanup=1
-device.name1=
-device.name2=
-device.name3=
-device.name4=
+device.name1=corsica
+device.name2=nevisp
+device.name3=ivory
+device.name4=ivoryss
 device.name5=
 
 # shell variables
-/dev/block/mmcblk0p5
+block=/dev/block/mmcblk0p5;
 
 ## end setup
 
