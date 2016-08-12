@@ -1932,7 +1932,7 @@ void AUDCTRL_DisablePlay(AUDIO_SOURCE_Enum_t source,
 	if (source == AUDIO_SOURCE_DSP || sink == AUDIO_SINK_DSP)
 		/* if bInVoiceCall== TRUE, assume the telphony_deinit() function
 		   sends DISABLE */
-		if (bInVoiceCall != TRUE) && !cpReset && !audioPathResetPending)
+		if (bInVoiceCall != TRUE)
 			AUDDRV_DisableDSPOutput();
 
 #if !defined(EANBLE_POP_CONTROL)
