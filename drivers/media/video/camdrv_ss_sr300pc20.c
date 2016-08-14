@@ -23,8 +23,8 @@
 #include <media/v4l2-chip-ident.h>
 #include <media/soc_camera.h>
 #include <linux/videodev2_brcm.h>
-#include <camdrv_ss.h>
-#include <camdrv_ss_sr300pc20.h>
+#include "camdrv_ss.h"
+#include "camdrv_ss_sr300pc20.h"
 
 
 #define SR300PC20_NAME	"sr300pc20"
