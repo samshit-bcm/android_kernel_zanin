@@ -91,9 +91,6 @@ static bool cam_class_init = false;
 ssize_t maincamtype_show(struct device *dev, struct device_attribute *attr, char *buf)
 {
 	char *sensorname;    /* this is to display the ISP version name. Rhea is SOC type ,so sensor name will be displayed.*/
-	#if defined(CONFIG_SOC_CAMERA)
-	camdrv_ss_sensor_main_name( &sensor);
-        #endif
 	sensorname=sensor.name;
 	CAM_INFO_PRINTK("%s  Enter\n", __func__);
 
@@ -109,10 +106,6 @@ ssize_t maincamtype_store(struct device *dev, struct device_attribute *attr, con
 ssize_t maincamfw_show(struct device *dev, struct device_attribute *attr, char *buf)
 {
 	char *sensorfw ;
-	#if defined(CONFIG_SOC_CAMERA)
-		camdrv_ss_sensor_main_name( &sensor);
-         #endif
-
 		 sensorfw = sensor.name;
 	CAM_INFO_PRINTK("%s  Enter\n", __func__);
 
