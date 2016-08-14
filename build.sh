@@ -11,8 +11,9 @@ restore='\033[0m'
 clear
 
 # Resources
+DEVICE="$1"
 THREAD="-j$(grep -c ^processor /proc/cpuinfo)"
-DEFCONFIG="cyanogenmod_corsica_defconfig"
+DEFCONFIG="cyanogenmod_$1_defconfig"
 KERNEL="zImage"
 
 #Hyper Kernel Details
