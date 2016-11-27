@@ -11,6 +11,8 @@ obj-$(CONFIG_HID)		+= hid.o
 
 hid-$(CONFIG_HIDRAW)		+= hidraw.o
 
+obj-$(CONFIG_UHID)		+= uhid.o
+
 hid-logitech-y		:= hid-lg.o
 ifdef CONFIG_LOGITECH_FF
 	hid-logitech-y	+= hid-lgff.o
