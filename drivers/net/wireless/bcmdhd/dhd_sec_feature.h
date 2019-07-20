@@ -1,5 +1,8 @@
 /*
- * Customer HW 4 dependant file
+ * Header file describing the internal (inter-module) DHD interfaces.
+ *
+ * Provides type definitions and function prototypes used to link the
+ * DHD OS, bus, and protocol modules.
  *
  * Copyright (C) 1999-2012, Broadcom Corporation
  *
@@ -21,51 +24,45 @@
  * software in any way with any other Broadcom software provided under a license
  * other than the GPL, without Broadcom's express prior written consent.
  *
- * $Id: dhd_sec_feature.h$
+ * $Id: dhd_sec_feature.h 309548 2012-01-20 01:13:08Z $
  */
-
-#ifndef _dhd_sec_feature_h_
-#define _dhd_sec_feature_h_
 
 /* PROJECTS */
 
-#if defined(CONFIG_MACH_SAMSUNG_ESPRESSO) || defined(CONFIG_MACH_SAMSUNG_ESPRESSO_10)
+#if defined(CONFIG_MACH_SAMSUNG_ESPRESSO)\
+	|| defined(CONFIG_MACH_SAMSUNG_ESPRESSO_10)
 #define READ_MACADDR
 #define HW_OOB
-#endif /* CONFIG_MACH_SAMSUNG_ESPRESSO && CONFIG_MACH_SAMSUNG_ESPRESSO_10 */
+#endif
 
 /* Q1 also uses this feature */
 #if defined(CONFIG_MACH_U1) || defined(CONFIG_MACH_TRATS)
 #ifdef CONFIG_MACH_Q1_BD
 #define HW_OOB
-#endif /* CONFIG_MACH_Q1_BD */
+#endif
 #define USE_CID_CHECK
 #define WRITE_MACADDR
-#endif /* CONFIG_MACH_U1 || CONFIG_MACH_TRATS */
+#endif
 
 #ifdef CONFIG_ARCH_MSM7X30
 #define HW_OOB
 #define READ_MACADDR
-#endif /* CONFIG_ARCH_MSM7X30 */
+#endif
 
-#if defined CONFIG_MACH_GC1 || defined CONFIG_MACH_U1_NA_SPR\
-	|| defined CONFIG_MACH_KONA
+#ifdef CONFIG_MACH_GC1
 #undef USE_CID_CHECK
 #define READ_MACADDR
-#endif /* CONFIG_MACH_GC1 || CONFIG_MACH_U1_NA_SPR */
+#endif
 
 #ifdef CONFIG_MACH_P10
 #define READ_MACADDR
-#endif /* CONFIG_MACH_P10 */
+#endif
 
 #ifdef CONFIG_ARCH_MSM8960
 #undef WIFI_TURNOFF_DELAY
 #define WIFI_TURNOFF_DELAY	200
 #endif
 
-#ifdef CONFIG_MACH_M0
-#define WL11U
-#endif
 
 #if defined(CONFIG_MACH_CAPRI_SS_S2VEP) || defined(CONFIG_MACH_CAPRI_SS_S2VE)
 #define BCMHOST_XTAL_PU_TIME_MOD
@@ -74,7 +71,7 @@
 #endif
 
 #if defined(CONFIG_MACH_RHEA_SS_NEVIS) || defined(CONFIG_MACH_RHEA_SS_NEVISP) || defined(CONFIG_MACH_RHEA_SS_ZANIN) || defined(CONFIG_MACH_RHEA_SS_IVORY) || defined(CONFIG_MACH_CAPRI_SS_BAFFIN) \
-	|| defined (CONFIG_MACH_CAPRI_SS_CRATER) || defined(CONFIG_MACH_RHEA_SS_IVORYSS) || defined(CONFIG_MACH_RHEA_SS_NEVISDS) || defined (CONFIG_MACH_RHEA_SS_CORSICA) || defined (CONFIG_MACH_RHEA_SS_CORSICASS)
+	|| defined (CONFIG_MACH_CAPRI_SS_CRATER) || defined(CONFIG_MACH_RHEA_SS_IVORYSS)
 #define BCMHOST_XTAL_PU_TIME_MOD
 #define READ_MACADDR
 #undef HW_OOB
@@ -85,29 +82,29 @@
 
 #if (WLAN_REGION_CODE >= 100) && (WLAN_REGION_CODE < 200) /*EUR*/
 #if (WLAN_REGION_CODE == 101) /*EUR ORG*/
-/* GAN LITE NAT KEEPALIVE FILTER */
+;/* GAN LITE NAT KEEPALIVE FILTER */
 #define GAN_LITE_NAT_KEEPALIVE_FILTER
-#endif /* WLAN_REGION_CODE == 101 */
-#endif /* WLAN_REGION_CODE >= 100 && WLAN_REGION_CODE < 200 */
+#endif
+#endif
 
 #if (WLAN_REGION_CODE >= 200) && (WLAN_REGION_CODE < 300) /* KOR */
 #undef USE_INITIAL_2G_SCAN_ORG
 #ifndef ROAM_ENABLE
 #define ROAM_ENABLE
-#endif /* ROAM_ENABLE */
+#endif
 #ifndef ROAM_API
 #define ROAM_API
-#endif /* ROAM_API */
+#endif
 #ifndef ROAM_CHANNEL_CACHE
 #define ROAM_CHANNEL_CACHE
-#endif /* ROAM_CHANNEL_CACHE */
+#endif
 #ifndef OKC_SUPPORT
 #define OKC_SUPPORT
-#endif /* OKC_SUPPORT */
+#endif
 
 #ifndef ROAM_AP_ENV_DETECTION
 #define ROAM_AP_ENV_DETECTION
-#endif /* ROAM_AP_ENV_DETECTION */
+#endif
 
 #undef WRITE_MACADDR
 #undef READ_MACADDR
@@ -115,29 +112,27 @@
 #define READ_MACADDR
 #else
 #define RDWR_MACADDR
-#endif /* CONFIG_BCM4334 */
+#endif
 
 #if (WLAN_REGION_CODE == 201) /* SKT */
-#endif /* WLAN_REGION_CODE == 201 */
+#endif
 
 #if (WLAN_REGION_CODE == 202) /* KTT */
 #define VLAN_MODE_OFF
 #define KEEP_ALIVE_PACKET_PERIOD_30_SEC
 #define FULL_ROAMING_SCAN_PERIOD_60_SEC
-#endif /* WLAN_REGION_CODE == 202 */
+#endif
 
 #if (WLAN_REGION_CODE == 203) /* LGT */
-#endif /* WLAN_REGION_CODE == 203 */
-#endif /* WLAN_REGION_CODE >= 200 && WLAN_REGION_CODE < 300 */
+#endif
+#endif
 
 #if (WLAN_REGION_CODE >= 300) && (WLAN_REGION_CODE < 400) /* CHN */
 #define BCMWAPI_WPI
 #define BCMWAPI_WAI
-#endif /* WLAN_REGION_CODE >= 300 && WLAN_REGION_CODE < 400 */
+#endif
 
-#if !defined(READ_MACADDR) && !defined(WRITE_MACADDR)\
-	&& !defined(RDWR_KORICS_MACADDR) && !defined(RDWR_MACADDR)
+#if !defined(READ_MACADDR) && !defined(WRITE_MACADDR) && !defined(RDWR_KORICS_MACADDR) && !defined(RDWR_MACADDR)
 #define GET_MAC_FROM_OTP
-#endif /* !READ_MACADDR && !WRITE_MACADDR && !RDWR_KORICS_MACADDR && !RDWR_MACADDR */
+#endif
 
-#endif /* _dhd_sec_feature_h_ */

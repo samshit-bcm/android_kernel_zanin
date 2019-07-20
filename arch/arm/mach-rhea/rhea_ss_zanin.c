@@ -779,9 +779,9 @@ static struct i2c_board_info __initdata zinitix_i2c_devices[] = {
 #if defined  (CONFIG_SENSORS_K3DH)
 static struct k3dh_platform_data k3dh_platform_data = {
 	.orientation = {
-	1, 0, 0,
 	0, 1, 0,
-	0, 0, 1},	      
+	1, 0, 0,
+	0, 0, -1},	      
 };
 #endif
 
@@ -1042,9 +1042,9 @@ static unsigned int  rheass_button_adc_values [3][2] =
 	/* SEND/END Min, Max*/
         {0,     95},
 	/* Volume Up  Min, Max*/
-        {96,    200},
+        {96,    240},
 	/* Volue Down Min, Max*/
-        {201,   480},
+        {241,   500},
 };
 
 static struct kona_headset_pd headset_data = {
